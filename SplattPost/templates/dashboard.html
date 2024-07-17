@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</head>
+<body>
+    <h1>Dashboard</h1>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        </ul>
+    </nav>
+
+    <h2>Upload Video</h2>
+    <div class="drag-area">
+        <div class="header">Drag & Drop to Upload File</div>
+        <input type="file" multiple hidden>
+    </div>
+    <button id="upload-button">Upload</button>
+    <ul class="file-list"></ul>
+
+    <h2>Saved Videos</h2>
+    <ul id="video-list">
+        {% for video in videos %}
+        <li>
+            <input type="radio" name="video" value="{{ video.filename }}"> {{ video.filename }}
+        </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Add Comment</h2>
+    <form>
+        <textarea id="comment-text" name="text" required></textarea>
+        <button type="submit">Add Comment</button>
+    </form>
+
+    <h2>Saved Comments</h2>
+    <ul>
+        {% for comment in comments %}
+        <li>{{ comment.text }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Post to Twitter</h2>
+    <button id="post-to-twitter">Post to Twitter</button>
+</body>
+</html>
